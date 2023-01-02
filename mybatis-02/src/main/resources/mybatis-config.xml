@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 核心配置文件 -->
+<configuration>
+
+    <!-- 引入外部配置文件 -->
+    <properties resource="db.properties" />
+
+    <!-- 也可以定义属性，如果内部与外部属性重复，以外部属性为准 -->
+    <!--<properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="username" value="111"/>
+    </properties>-->
+
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!-- 可以给实体类起别名 -->
+    <typeAliases>
+        <typeAlias type="com.lx.pojo.User" alias="User" />
+    </typeAliases>
+
+    <!-- 扫描实体类的包，它的默认别名是类名首字母小写 -->
+    <!--<typeAliases>
+        <package name="com.lx.pojo"/>
+    </typeAliases>-->
+    
+
+
+    <!-- 环境变量配置 -->
+    <environments default="development"> <!--  default 切换至不同的environment -->
+        <environment id="development"> <!-- 环境变量配置 -->
+            <transactionManager type="JDBC"/> <!-- transactionManager事务管理器 JDBC/MANAGED -->
+            <dataSource type="POOLED"> <!-- 数据源  POOLED/UNPOOLED/JNDI -->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="com/lx/dao/UserMapper.xml"/>
+    </mappers>
+    <!--<mappers>
+        <mapper class="com.lx.dao.UserMapper" />
+    </mappers>-->
+    <!--<mappers>
+        <package name="com.lx.dao" />
+    </mappers>-->
+</configuration>
